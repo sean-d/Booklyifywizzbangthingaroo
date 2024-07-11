@@ -7,6 +7,7 @@ and will provide a user auth mechanism to protect certain endpoints. This will b
 * Gin
   * `go get -u github.com/gin-gonic/gin`
 * SQLite
+  * `go get github.com/mattn/go-sqlite3`
 
 ## Plan
 Create an "events booking" API with the following:

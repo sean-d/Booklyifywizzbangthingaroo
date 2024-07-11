@@ -8,6 +8,9 @@
 *.so
 *.dylib
 
+# sql db
+*.db
+
 # ide and os stuff
 .idea/
 *.DS_Store
