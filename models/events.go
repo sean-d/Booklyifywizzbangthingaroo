@@ -100,3 +100,22 @@ func GetEvent(eventID int64) (*Event, error) {
 
 	return &event, nil
 }
+
+func (e Event) UpdateEvent() error {
+	query := `
+	Update events
+	SET name = ?, description = ?, location = ?, date_time = ?
+	WHERE id = ?
+    `
+
+	statement, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer statement.Close()
+
+	_, err = statement.Exec(e.Name, e.Description, e.Location, e.DateTime, e.ID) // same order as the query above, e.ID satisfies the WHERE
+
+	return err // will return an error from the statement.Exec or nil; satisfying the method return
+
+}
