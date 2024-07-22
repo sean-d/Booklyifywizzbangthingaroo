@@ -102,3 +102,25 @@ func updateEvent(context *gin.Context) {
 	}
 	context.JSON(http.StatusOK, gin.H{"message": "Event updated", "event": updatedEvent})
 }
+
+func deleteEvent(context *gin.Context) {
+	// the param is a string, so we convert it to an int. we use base 10 since it's decimal and 64 since our
+	// event id type in the Event struct is int64.
+	eventID, err := strconv.ParseInt(context.Param("eventID"), 10, 64)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "Could not parse event id"})
+		return
+	}
+
+	event, err := models.GetEvent(eventID)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "Could not find event"})
+	}
+
+	err = event.DeleteEvent()
+
+	context.JSON(http.StatusOK, gin.H{"message": "Event deleted", "event": event})
+
+}
