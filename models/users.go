@@ -1,6 +1,9 @@
 package models
 
-import "github.com/sean-d/Booklyifywizzbangthingaroo/db"
+import (
+	"github.com/sean-d/Booklyifywizzbangthingaroo/db"
+	hash "github.com/sean-d/Booklyifywizzbangthingaroo/utils"
+)
 
 type User struct {
 	ID       int64
@@ -17,7 +20,8 @@ func (u *User) Save() (err error) {
 		return err
 	}
 
-	result, err := statement.Exec(u.Email, u.Password)
+	hashedPassword, err := hash.HashPassword(u.Password)
+	result, err := statement.Exec(u.Email, hashedPassword)
 
 	if err != nil {
 		return err

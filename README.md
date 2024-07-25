@@ -4,6 +4,8 @@ and will provide a user auth mechanism to protect certain endpoints. This will b
 
 ## Dependencies
 * Go
+* Bcrypt
+  * `go get -u golang.org/x/crypto/`
 * Gin
   * `go get -u github.com/gin-gonic/gin`
 * SQLite
