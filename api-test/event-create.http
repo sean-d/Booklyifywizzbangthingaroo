@@ -1,5 +1,7 @@
 POST http://localhost:8080/events
 content-type: application/json
+// get this token from creating a user and logging in with that user
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQGhvbWUuY29tIiwiZXhwIjoxNzMxNDQ2NTQ4LCJ1c2VySWQiOjF9.v5fiVrbJCT0u7P8TWnxEpUA5WBOeko2dNjbbi3Ev7to
 
 {
   "name": "post test",

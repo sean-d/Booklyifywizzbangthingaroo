@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sean-d/Booklyifywizzbangthingaroo/models"
+	"github.com/sean-d/Booklyifywizzbangthingaroo/utils"
 	"net/http"
 	"strconv"
 )
@@ -44,16 +45,38 @@ func getEvents(context *gin.Context) {
 
 func createEvent(context *gin.Context) {
 	/*
-		Using ShouldBindJSON to create a json object based on the struct def of events.Event.
-		If there's an error, a json representation of an error is returned
+			Using ShouldBindJSON to create a json object based on the struct def of events.Event.
+			If there's an error, a json representation of an error is returned
+
+			"Authorization" in the header is where things such as tokens will reside.
+
+			if token is blank, we return and error and return out
+		 	if the token cannot be verified, we return an error and return out
+			if we are not able to create an event, we return an error and return out
 
 	*/
+
+	token := context.Request.Header.Get("Authorization")
+
+	// check for no token
+	if token == "" {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized"})
+		return
+	}
+
+	err := utils.VerifyToken(token)
+
+	if err != nil {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized."})
+		return
+	}
+
 	var event models.Event
-	err := context.ShouldBindJSON(&event)
+	err = context.ShouldBindJSON(&event)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Could not create event."})
-		return // we return to prevent the rest of this from proceeding.
+		return
 	}
 
 	// dummy entries for now until we move to a proper db
