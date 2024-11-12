@@ -44,17 +44,18 @@ func (u *User) ValidateCredentials() (err error) {
 		validate the credentials provided are ... valid
 
 		we query a single row as we know each email is unique
-		we take what is returned from the query and assign it to the helper variable, retrieved...
+		we take what is returned from the query and assign it to the helper variable,
+			and we assign the userId to the user instance field id.
 
 		Scan returns an error if no rows matched query
 
 	*/
 
-	query := "SELECT password FROM users WHERE email = ?"
+	query := "SELECT id, password FROM users WHERE email = ?"
 	row := db.DB.QueryRow(query, u.Email)
 
 	var retreivedPassword string
-	err = row.Scan(&retreivedPassword)
+	err = row.Scan(&u.ID, &retreivedPassword)
 
 	if err != nil {
 		return errors.New("Credentials invalid")

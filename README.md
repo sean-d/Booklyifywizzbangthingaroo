@@ -8,6 +8,8 @@ and will provide a user auth mechanism to protect certain endpoints. This will b
   * `go get -u golang.org/x/crypto/`
 * Gin
   * `go get -u github.com/gin-gonic/gin`
+* Golang-JWT
+  * `go get -u github.com/golang-jwt/jwt/v5`
 * SQLite
   * `go get github.com/glebarez/go-sqlite`
 
