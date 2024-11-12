@@ -3,7 +3,6 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sean-d/Booklyifywizzbangthingaroo/models"
-	"github.com/sean-d/Booklyifywizzbangthingaroo/utils"
 	"net/http"
 	"strconv"
 )
@@ -45,41 +44,26 @@ func getEvents(context *gin.Context) {
 
 func createEvent(context *gin.Context) {
 	/*
-			Using ShouldBindJSON to create a json object based on the struct def of events.Event.
-			If there's an error, a json representation of an error is returned
+		Using ShouldBindJSON to create a json object based on the struct def of events.Event.
+		If there's an error, a json representation of an error is returned
 
-			"Authorization" in the header is where things such as tokens will reside.
+		we grab the userId from the context as it was set in the Authenticate middleware.
+		it is a float64 so we use context.GetFLoat64() to retrieve the value for the supplied key.
 
-			if token is blank, we return and error and return out
-		 	if the token cannot be verified, we return an error and return out
-			if we are not able to create an event, we return an error and return out
+
+		if we are not able to create an event, we return an error and return out
 
 	*/
 
-	token := context.Request.Header.Get("Authorization")
-
-	// check for no token
-	if token == "" {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized: empty token"})
-		return
-	}
-
-	userId, err := utils.VerifyToken(token)
-
-	if err != nil {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized: cannot validate"})
-		return
-	}
-
 	var event models.Event
-	err = context.ShouldBindJSON(&event)
+	err := context.ShouldBindJSON(&event)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Could not create event."})
 		return
 	}
 
-	// dummy entries for now until we move to a proper db
+	userId := context.GetFloat64("userId")
 	event.UserID = userId
 
 	// if everything works...

@@ -1,2 +1,4 @@
-DELETE http://localhost:8080/events/1
+DELETE http://localhost:8080/events/6
 content-type: application/json
+// authorization header required to delete events now that we have an auth middleware
+authorization:

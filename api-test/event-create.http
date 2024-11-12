@@ -1,7 +1,7 @@
 POST http://localhost:8080/events
 content-type: application/json
 // get this token from creating a user and logging in with that user
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lMkBob21lLmNvbSIsImV4cCI6MTczMTQ0ODY3NCwidXNlcklkIjoyfQ.0Zwwf_Y8J0ac1nb4XMh6vFqicz57OecZGe5E0ORFMx8
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQGhvbWUuY29tIiwiZXhwIjoxNzMxNDU3MjUzLCJ1c2VySWQiOjF9._zZin-HxnItMmFFVHA2Fn0JPM8TsZfRdb0xZoKUu2hc
 
 {
   "name": "post test with hope2",
