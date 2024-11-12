@@ -60,14 +60,14 @@ func createEvent(context *gin.Context) {
 
 	// check for no token
 	if token == "" {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized"})
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized: empty token"})
 		return
 	}
 
-	err := utils.VerifyToken(token)
+	userId, err := utils.VerifyToken(token)
 
 	if err != nil {
-		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized."})
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized: cannot validate"})
 		return
 	}
 
@@ -80,8 +80,7 @@ func createEvent(context *gin.Context) {
 	}
 
 	// dummy entries for now until we move to a proper db
-	event.ID = 1
-	event.UserID = 1
+	event.UserID = userId
 
 	// if everything works...
 	err = event.Save()

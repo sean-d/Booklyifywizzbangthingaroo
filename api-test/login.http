@@ -8,6 +8,6 @@ content-type: application/json
 //}
 # valid to test
 {
-"email": "me@home.com",
+"email": "me2@home.com",
 "password": "password"
 }

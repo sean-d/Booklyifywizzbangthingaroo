@@ -29,9 +29,10 @@ func GenerateToken(email string, userId int64) (string, error) {
 	return token.SignedString([]byte(secretKey))
 }
 
-func VerifyToken(t string) error {
+func VerifyToken(t string) (float64, error) {
 	/*
-		verify supplied token is valid
+		verify supplied token is valid.
+		returns userId and any errors.
 
 		jwt.Parse:
 			takes in the supplied token, t
@@ -53,6 +54,7 @@ func VerifyToken(t string) error {
 		since claims is simply a map, we can easily get the email and userId from it.
 		mapClaims: values are of type any. so we type check to ensure email and userId are the correct types
 
+
 	*/
 
 	parsedToken, err := jwt.Parse(t, func(token *jwt.Token) (any, error) {
@@ -67,31 +69,30 @@ func VerifyToken(t string) error {
 	})
 
 	if err != nil {
-		return errors.New("Could not parse token")
+		return 0, errors.New("Could not parse token")
 	}
 
 	if !parsedToken.Valid {
-		return errors.New("Invalid token")
+		return 0, errors.New("Invalid token")
 	}
 
-	/*
-		claims, ok := parsedToken.Claims.(jwt.MapClaims)
+	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 
-		if !ok {
-			return errors.New("Invalid token")
-		}
+	if !ok {
+		return 0, errors.New("Invalid token")
+	}
 
-		email, ok := claims["email"].(string)
+	//email, ok := claims["email"].(string)
+	//
+	//if !ok {
+	//	return errors.New("Unable to extract email from token")
+	//}
 
-		if !ok {
-			return errors.New("Unable to extract email from token")
-		}
+	userId, ok := claims["userId"].(float64)
 
-		userId, ok := claims["userId"].(int64)
+	if !ok {
+		return 0, errors.New("Unable to extract userId from token")
+	}
 
-		if !ok {
-			return errors.New("Unable to extract userId from token")
-		}
-	*/
-	return nil
+	return userId, nil
 }
