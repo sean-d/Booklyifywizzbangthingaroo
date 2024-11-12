@@ -6,7 +6,7 @@ import "github.com/gin-gonic/gin"
 // We make RegisterRoutes public to be called from main but the actual handlers are kept in the "routes" package.
 
 func RegisterRoutes(server *gin.Engine) {
-	// all get requests for /events will be handled by a handler function. this handler function is automatically
+	// all get requests will be handled by a handler function. this handler function is automatically
 	// given a gin context. We are using a pointer to the single server instance of gin.Engine so there is no need to return anything.
 
 	server.GET("/events", getEvents)
@@ -15,4 +15,5 @@ func RegisterRoutes(server *gin.Engine) {
 	server.PUT("/events/:eventID", updateEvent)
 	server.DELETE("/events/:eventID", deleteEvent)
 	server.POST("/signup", signup)
+	server.POST("/login", login)
 }

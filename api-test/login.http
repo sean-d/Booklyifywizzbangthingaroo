@@ -1,0 +1,13 @@
+POST http://localhost:8080/login
+content-type: application/json
+
+# invalid to test
+//{
+//  "email": "test3@nothing.com",
+//  "password": "something"
+//}
+# valid to test
+{
+"email": "me@home.com",
+"password": "password"
+}

@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-// routes/events.go: handles all request handler functions that deal with events
+// routes/event.go: handles all request handler functions that deal with events
 
 func getEvent(context *gin.Context) {
 	// the param is a string, so we convert it to an int. we use base 10 since it's decimal and 64 since our
