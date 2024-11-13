@@ -1,20 +1,19 @@
 package models
 
 import (
-	"fmt"
 	"github.com/sean-d/Booklyifywizzbangthingaroo/db"
 	"time"
 )
 
 type Event struct {
 	// defining what the gin json bind should expect to always get
-	// userId is float64 due to jwt storing as this type and me not wanting to type convert
+
 	ID          int64
 	Name        string    `binding:"required"`
 	Description string    `binding:"required"`
 	Location    string    `binding:"required"`
 	DateTime    time.Time `binding:"required"`
-	UserID      float64
+	UserID      int64
 }
 
 //var events []Event
@@ -57,7 +56,6 @@ func GetAllEvents() ([]Event, error) {
 	rows, err := db.DB.Query(query)
 
 	if err != nil {
-		fmt.Println("UNABLE TO QUERY TO FILL OUT ROWS")
 		return nil, err
 	}
 
@@ -72,7 +70,6 @@ func GetAllEvents() ([]Event, error) {
 		err = rows.Scan(&event.ID, &event.Name, &event.Description, &event.Location, &event.DateTime, &event.UserID)
 
 		if err != nil {
-			fmt.Println("UNABLE TO CREATE STRUCT WITH ROW DATA")
 			return nil, err
 		}
 

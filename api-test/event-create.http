@@ -1,10 +1,10 @@
 POST http://localhost:8080/events
 content-type: application/json
 // get this token from creating a user and logging in with that user
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQGhvbWUuY29tIiwiZXhwIjoxNzMxNDU3MjUzLCJ1c2VySWQiOjF9._zZin-HxnItMmFFVHA2Fn0JPM8TsZfRdb0xZoKUu2hc
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lMkBob21lLmNvbSIsImV4cCI6MTczMTQ3NDk3NSwidXNlcklkIjoyfQ.eI5CLqJ0mQ1OVyp9Z-bwXnixfwKDlvhWg43cwSz60oU
 
 {
-  "name": "post test with hope2",
+  "name": "event from uid 2",
   "description": "test event description",
   "location": "that place where i hid that thing that one time",
   "datetime": "2024-06-17T15:44:00.000Z"

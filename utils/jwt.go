@@ -29,7 +29,7 @@ func GenerateToken(email string, userId int64) (string, error) {
 	return token.SignedString([]byte(secretKey))
 }
 
-func VerifyToken(t string) (float64, error) {
+func VerifyToken(t string) (int64, error) {
 	/*
 		verify supplied token is valid.
 		returns userId and any errors.
@@ -88,11 +88,9 @@ func VerifyToken(t string) (float64, error) {
 	//	return errors.New("Unable to extract email from token")
 	//}
 
-	userId, ok := claims["userId"].(float64)
-
-	if !ok {
-		return 0, errors.New("Unable to extract userId from token")
-	}
+	// because it's so much fun to get a float64 back for a number that can never be anything other than an int....
+	// whoever designed this should be kneecapped.
+	userId := int64(claims["userId"].(float64))
 
 	return userId, nil
 }
