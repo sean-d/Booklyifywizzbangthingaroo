@@ -1,10 +1,10 @@
 POST http://localhost:8080/events
 content-type: application/json
 // get this token from creating a user and logging in with that user
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lMkBob21lLmNvbSIsImV4cCI6MTczMTQ3NDk3NSwidXNlcklkIjoyfQ.eI5CLqJ0mQ1OVyp9Z-bwXnixfwKDlvhWg43cwSz60oU
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQGhvbWUuY29tIiwiZXhwIjoxNzMxNTM3NzQwLCJ1c2VySWQiOjJ9.ozjcFZL8VqRGyHvMiVDTPNafX3AR2pGrMDVVg31qIl8
 
 {
-  "name": "event from uid 2",
+  "name": "new event",
   "description": "test event description",
   "location": "that place where i hid that thing that one time",
   "datetime": "2024-06-17T15:44:00.000Z"

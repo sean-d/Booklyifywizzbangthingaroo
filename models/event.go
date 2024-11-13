@@ -124,10 +124,52 @@ func (e *Event) DeleteEvent() error {
 	`
 
 	statement, err := db.DB.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+
+	defer statement.Close()
+
+	_, err = statement.Exec(e.ID)
+
+	return err
+}
+
+func (e *Event) Register(userId int64) error {
+	/*
+		creates db entry, or registration, pairing the passed-in userId with the current eventId
+	*/
+
+	query := `INSERT INTO registrations(event_id, user_id) VALUES(?,?)`
+
+	statement, err := db.DB.Prepare(query)
+
 	if err != nil {
 		return err
 	}
 	defer statement.Close()
-	_, err = statement.Exec(e.ID)
+
+	_, err = statement.Exec(e.ID, userId)
+
+	return err
+}
+
+func (e *Event) CancelRegistration(userId int64) error {
+	/*
+		deletes db entry, or registration, pairing the passed-in userId with the current eventId
+	*/
+
+	query := `DELETE FROM registrations WHERE event_id = ? AND user_id = ?`
+
+	statement, err := db.DB.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+	defer statement.Close()
+
+	_, err = statement.Exec(e.ID, userId)
+
 	return err
 }

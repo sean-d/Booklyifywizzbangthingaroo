@@ -80,7 +80,7 @@ func createEvent(context *gin.Context) {
 func updateEvent(context *gin.Context) {
 	// the param is a string, so we convert it to an int. we use base 10 since it's decimal and 64 since our
 	// event id type in the Event struct is int64.
-	eventID, err := strconv.ParseInt(context.Param("eventID"), 10, 64)
+	eventId, err := strconv.ParseInt(context.Param("eventID"), 10, 64)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Could not parse event id"})
@@ -88,7 +88,7 @@ func updateEvent(context *gin.Context) {
 	}
 
 	userId := context.GetInt64("userID")
-	event, err := models.GetEvent(eventID) // we are not using the resulting event, only checking that it was queried successfully. will be using it later on. leaving _ until needed
+	event, err := models.GetEvent(eventId) // we are not using the resulting event, only checking that it was queried successfully. will be using it later on. leaving _ until needed
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": "Could not fetch event"})
@@ -106,7 +106,7 @@ func updateEvent(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Could not update event"})
 	}
 
-	updatedEvent.ID = eventID // the eventID we received as a param to the updateEvent function
+	updatedEvent.ID = eventId // the eventID we received as a param to the updateEvent function
 	updatedEvent.UserID = userId
 	err = updatedEvent.UpdateEvent()
 	if err != nil {
