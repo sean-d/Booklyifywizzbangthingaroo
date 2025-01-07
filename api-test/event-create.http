@@ -1,7 +1,7 @@
 POST http://localhost:8080/events
 content-type: application/json
 // get this token from creating a user and logging in with that user
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQGhvbWUuY29tIiwiZXhwIjoxNzMxNTM3NzQwLCJ1c2VySWQiOjJ9.ozjcFZL8VqRGyHvMiVDTPNafX3AR2pGrMDVVg31qIl8
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQGhvbWUuY29tIiwiZXhwIjoxNzM2MjkyOTc2LCJ1c2VySWQiOjF9.GSJ0uEuKCajnwNkXL_tWkgHCew2eVnUc9Skj7tQvy-o
 
 {
   "name": "new event",
